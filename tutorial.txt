@@ -1,0 +1,38 @@
+# java项目的代码在java目录下
+ 
+# hadoop-demo项目编译打包，将生成的jar包copy到本目录下，打包生成的jar包默认名称为hadoop-demo-0.0.1-SNAPSHOT.jar 
+ （这一步我已经做好了，jar包可以直接使用，你也可以自己重新打包）
+
+# 将以下内容复制到docker-compose.yml中，添加一个webserver容器 （这一步我已经做好了）
+  webserver:
+    container_name: webserver
+    image: eclipse/ubuntu_jdk8
+    ports:
+      - 8080:8080
+    volumes:
+      - ./hadoop-demo-0.0.1-SNAPSHOT.jar:/hadoop-demo-0.0.1-SNAPSHOT.jar
+    command: java -jar /hadoop-demo-0.0.1-SNAPSHOT.jar
+
+# 启动容器组
+docker-compose up
+
+# 连接到datanode容器
+docker exec -it datanode bash
+
+# 下载随机生成的电影数据
+curl http://webserver:8080/api/movies -o movie.json
+
+# 在hdfs文件系统中创建input文件夹
+hdfs dfs -mkdir /input
+
+# 将本地的movie.json复制到hdfs文件系统
+hdfs dfs -put movie.json /input
+
+# 查看hdfs文件系统中input目录下的文件
+hdfs dfs -ls /input
+
+# 本地浏览器访问
+http://localhost:8080/api/files/movie.json
+即为从hadoop系统中取到的电影数据
+
+# 后端的工作完成了，接下来就是把数据渲染到前端页面
