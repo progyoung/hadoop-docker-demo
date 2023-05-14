@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>折线图</title>
+    <script src="js/echarts.js"></script>
+</head>
+<body>
+    <div id="product" style="width:500px;height: 400px;"></div>
+    <script>
+        var pro = echarts.init(document.getElementById("product"));
+        var option = {
+            title: {
+                text: '一周产品销量',
+                subtext: 'XiaoMi',
+                left: 'center'
+            },
+            xAxis: {
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '销量',
+                    type: 'line',
+                    data: [30, 45, 10, 100, 200, 150, 120]
+                }
+            ]
+        }
+        pro.setOption(option);
+    </script>
+</body>
+</html>

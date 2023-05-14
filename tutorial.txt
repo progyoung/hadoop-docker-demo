@@ -36,3 +36,7 @@ http://localhost:8080/api/files/movie.json
 即为从hadoop系统中取到的电影数据
 
 # 后端的工作完成了，接下来就是把数据渲染到前端页面
+
+# 查看前端页面
+http://localhost:8080/movie.html
+看到的就是随机生成的电影数据

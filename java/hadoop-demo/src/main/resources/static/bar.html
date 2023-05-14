@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柱状图-专业人数</title>
+    <script src="js/echarts.js"></script>
+</head>
+
+<body>
+    <div id="product" style="width:500px;height: 400px;"></div>
+    <script>
+        // 初始化
+        var pro = echarts.init(document.getElementById("product"));
+        // 设置图形参数
+        var option = {
+            title: {
+                text: '计算机系20级各专业人数'
+            },
+            xAxis: {
+                data: ['计科', '软工', '网工', '数媒']
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: "专业人数",
+                    type: "bar",
+                    data: [120, 95, 68, 97]
+                }
+            ]
+        };
+        // 把参数和图相关联
+        pro.setOption(option);
+    </script>
+</body>
+
+</html>

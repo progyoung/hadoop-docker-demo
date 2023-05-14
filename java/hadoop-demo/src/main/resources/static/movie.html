@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柱状图-电影票房数据可视化</title>
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="product" style="max-width:5000px;height: 400px;"></div>
+    <script>
+        var movieData = '[{"name":"The Shawshank Redemption","number":148},{"name":"The Godfather","number":290},{"name":"The Godfather: Part II","number":200},{"name":"The Dark Knight","number":456},{"name":"12 Angry Men","number":136},{"name":"Schindlers List","number":443},{"name":"Pulp Fiction","number":414},{"name":"The Lord of the Rings: The Return of the King","number":254},{"name":"The Good, the Bad and the Ugly","number":544},{"name":"Fight Club","number":409},{"name":"Star Wars: Episode V - The Empire Strikes Back","number":468}]';
+        $.get("http://localhost:8080/api/movies", function(data,status) {
+            movieData = data;
+        })
+        var movieArray = JSON.parse(movieData);
+        var nameArray = [];
+        var amountArray = [];
+
+        for (var i = 0; i < movieArray.length; i++) {
+            nameArray.push(movieArray[i].name);
+            amountArray.push(movieArray[i].number);
+        }
+
+        // 初始化
+        var pro = echarts.init(document.getElementById("product"));
+
+        // 设置图形参数
+        var option = {
+            title: {
+                text: '电影票房数据可视化'
+            },
+            xAxis: {
+                data: nameArray,
+                axisLabel: {rotate: -60},
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: "专业人数",
+                    type: "bar",
+                    data: amountArray
+                }
+            ]
+        };
+
+        // 把参数和图相关联
+        pro.setOption(option);
+    </script>
+</body>
+
+</html>

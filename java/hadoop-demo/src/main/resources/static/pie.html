@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>饼图</title>
+    <script src="js/echarts.js"></script>
+</head>
+
+<body>
+    <div id="product" style="width:500px;height:400px"></div>
+    <script>
+        var pro = echarts.init(document.getElementById("product"));
+        var option = {
+            title: {
+                text: '各商场销售占比',
+                subtext: 'A商场的销量',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['鼠标', '键盘', '平板', '水杯', '手机']
+            },
+            series: [
+                {
+                    name: '所售商品',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    data: [
+                        { value: 1048, name: '鼠标' },
+                        { value: 735, name: '键盘' },
+                        { value: 580, name: '平板' },
+                        { value: 484, name: '水杯' },
+                        { value: 300, name: '手机' }
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        }
+        pro.setOption(option);
+    </script>
+
+</body>
+
+</html>
