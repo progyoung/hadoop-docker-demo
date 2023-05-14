@@ -13,10 +13,14 @@
 <body>
     <div id="product" style="max-width:5000px;height: 400px;"></div>
     <script>
-        var movieData = '[{"name":"The Shawshank Redemption","number":148},{"name":"The Godfather","number":290},{"name":"The Godfather: Part II","number":200},{"name":"The Dark Knight","number":456},{"name":"12 Angry Men","number":136},{"name":"Schindlers List","number":443},{"name":"Pulp Fiction","number":414},{"name":"The Lord of the Rings: The Return of the King","number":254},{"name":"The Good, the Bad and the Ugly","number":544},{"name":"Fight Club","number":409},{"name":"Star Wars: Episode V - The Empire Strikes Back","number":468}]';
-        $.get("http://localhost:8080/api/movies", function(data,status) {
+        var movieData = [];
+        console.info("movieData1:", movieData);
+        $.get({url:"http://localhost:8080/api/movies", success: function(data,status) {
             movieData = data;
-        })
+            console.info("data:", data);
+            console.info("movieData2:", movieData);
+        },async: false});
+        console.info("movieData3:", movieData);
         var movieArray = JSON.parse(movieData);
         var nameArray = [];
         var amountArray = [];
